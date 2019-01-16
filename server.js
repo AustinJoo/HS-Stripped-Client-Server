@@ -1,11 +1,12 @@
 const express = require('express');
 var listingsDBFinder = require('./mongoFinder.js');
+var path = require('path');
 
 // Middleware
 const bodyParser = require('body-parser');
 
 const app = express();
-app.use('/:listingID', express.static(__dirname + '/../client/dist'));
+app.use('/:listingID', express.static(path.join(__dirname, './client/dist')));
 console.log(__dirname + '/../client/dist');
 app.use(bodyParser.json());
 

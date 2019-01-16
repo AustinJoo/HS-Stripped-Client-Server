@@ -1,7 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const uri = 'mongodb://@18.220.171.207' 
-// || 
-// 'mongodb://localhost:27017/helensMongoCarousel';
+const uri = 'mongodb://@18.220.171.207' || 'mongodb://localhost:27017/helensMongoCarousel';
 const client = new MongoClient(uri);
 const connection = client.connect();
 
@@ -13,7 +11,7 @@ let finder = (id, callback) => {
     const connect = connection
     connect.then(() => {
         console.log('THE SEARCHID IS: ', searchID)
-        db = client.db('helensMongoCarousel')
+        let db = client.db('helensMongoCarousel')
         db.collection('listings').findOne({_id: Number(searchID)})
         .then((data) => {
             // console.log('THIS IS THE DATA: ' , data);
