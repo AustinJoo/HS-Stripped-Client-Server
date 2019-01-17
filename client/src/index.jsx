@@ -162,66 +162,6 @@ class App extends React.Component {
         <main>
           <div className="wrapper">
             <CarouselImages images={this.state.pictures} handleClick={this.handleClick}/>
-            {/* <img
-              // onMouseEnter={() => {
-              //   this.onMouseEnter("a");
-              // }}
-              onClick={e => this.handleClick(e)}
-              clickedImage={this.state.clickedImage}
-              className="a"
-              id="0"
-              src={`https://s3.us-east-2.amazonaws.com/hjs-images/${
-                this.state.pictures[0]
-              }`}
-            />
-
-            <img
-              // onMouseEnter={() => {
-              //   this.onMouseEnter("b");
-              // }}
-              onClick={this.handleClick}
-              className="b"
-              id="1"
-              src={`https://s3.us-east-2.amazonaws.com/hjs-images/${
-                this.state.pictures[1]
-              }`}
-            />
-
-            <img
-              // onMouseEnter={() => {
-              //   this.onMouseEnter("c");
-              // }}
-              onClick={this.handleClick}
-              className="c"
-              id="2"
-              src={`https://s3.us-east-2.amazonaws.com/hjs-images/${
-                this.state.pictures[2]
-              }`}
-            />
-
-            <img
-              // onMouseEnter={() => {
-              //   this.onMouseEnter("d");
-              // }}
-              onClick={this.handleClick}
-              className="d"
-              id="3"
-              src={`https://s3.us-east-2.amazonaws.com/hjs-images/${
-                this.state.pictures[3]
-              }`}
-            />
-
-            <img
-              // onMouseEnter={() => {
-              //   this.onMouseEnter("e");
-              // }}
-              onClick={this.handleClick}
-              className="e"
-              id="4"
-              src={`https://s3.us-east-2.amazonaws.com/hjs-images/${
-                this.state.pictures[4]
-              }`} */}
-            />
           </div>
         </main>
       );
