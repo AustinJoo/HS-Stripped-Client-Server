@@ -1,0 +1,16 @@
+config:
+  target: "http://ec2-3-16-208-224.us-east-2.compute.amazonaws.com"
+  processor: './artilleryFunctions.js'
+  phases:
+    - duration: 60
+      arrivalRate: 20
+    - duration: 600
+      arrivalRate: 50
+scenarios:
+  - name: "Retrieve an image carousel"
+    flow:
+      -function: 'randomizer'
+      - post:
+          url: "/"
+          json:
+            id: '{{id}}'
