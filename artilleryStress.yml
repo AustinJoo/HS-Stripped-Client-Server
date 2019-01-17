@@ -11,6 +11,6 @@ scenarios:
     flow:
       - function: 'randomizer'
       - post:
-          url: "/"
-          json:
-            id: '{{id}}'
+          url: "/{id}"
+          # json:
+          #   id: '{{id}}'
