@@ -53,7 +53,10 @@ class App extends React.Component {
       console.log('DID I RUN????????', data);
       this.setState({pictures: data.images});
       console.log(this.state.pictures);
-    });
+    })
+    .catch(() => {
+      console.log('THERE WAS AN ERROR AT THE REACT GET: ', err);
+    })
   }
 
   handleClick(e) {
