@@ -9,7 +9,7 @@ config:
 scenarios:
   - name: "Retrieve an image carousel"
     flow:
-      -function: 'randomizer'
+      - function: 'randomizer'
       - post:
           url: "/"
           json:
