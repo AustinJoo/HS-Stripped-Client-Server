@@ -36,7 +36,7 @@ class App extends React.Component {
     let url_listing = window.location.pathname.substr(1).split("/")[0];
 
     console.log('this is the url listing', url_listing)
-    console.log('this is the type of the url listing: ', url_listing.constructor)
+    console.log('this is the type of the url listing: ', url_listing.constructor())
 
     this.getPictures(url_listing);
     // console.log('this is the listing ID after setting state', this.state.listingID)
@@ -44,7 +44,7 @@ class App extends React.Component {
   }
 
   getPictures(listingID) {
-    console.log('YOU MADE IT THIS FAR! LISTINGID AND TYPE ARE: ', listingID, listingID.constructor);
+    console.log('YOU MADE IT THIS FAR! LISTINGID AND TYPE ARE: ', listingID, listingID.constructor());
     // console.log('filler')
     axios.get(`/api/pictures/${listingID}`).then(({ data }) => {
       console.log('DID I RUN????????', data);
