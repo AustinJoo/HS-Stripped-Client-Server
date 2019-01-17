@@ -47,8 +47,7 @@ class App extends React.Component {
   }
 
   getPictures(listingID) {
-    let imagesNeeded = [];
-    console.log(listingID.constructor);
+    console.log('YOU MADE IT THIS FAR! LISTINGID AND TYPE ARE: ', listingID, listingID.constructor);
     axios.get(`/api/pictures/${listingID}`).then(({ data }) => {
       console.log('DID I RUN????????', data);
       this.setState({pictures: data.images});
