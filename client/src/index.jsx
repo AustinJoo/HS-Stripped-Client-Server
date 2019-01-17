@@ -38,7 +38,7 @@ class App extends React.Component {
     console.log('this is the url listing', url_listing)
 
 
-    this.getPictures(this.state.listingID);
+    this.getPictures(url_listing);
     // console.log('this is the listing ID after setting state', this.state.listingID)
     console.log(this.state.pictures));  
   }
