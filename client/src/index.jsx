@@ -40,7 +40,7 @@ class App extends React.Component {
 
     this.getPictures(url_listing);
     // console.log('this is the listing ID after setting state', this.state.listingID)
-    console.log(this.state.pictures));  
+    console.log(this.state.pictures);  
   }
 
   getPictures(listingID) {
