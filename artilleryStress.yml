@@ -4,8 +4,6 @@ config:
   phases:
     - duration: 60
       arrivalRate: 20
-    - duration: 600
-      arrivalRate: 50
 scenarios:
   - name: "Retrieve an image carousel"
     flow:
