@@ -1,10 +1,14 @@
 'use strict';
 
-let randomizer = () => {
-    return parseInt(Math.random()*10000000)
+module.exports = {
+    randomizer
+};
+
+var randomizer = (context, events, done) => {
+    const id = parseInt(Math.random()*10000000);
+    context.vars.id = id;
+    return done();
 }
 
-console.log(randomizer());
 
-module.exports.randomizer = randomizer;
 

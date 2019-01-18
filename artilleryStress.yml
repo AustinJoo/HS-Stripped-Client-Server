@@ -1,5 +1,5 @@
 config:
-  target: "http://ec2-3-16-208-224.us-east-2.compute.amazonaws.com"
+  target: "http://ec2-3-16-208-224.us-east-2.compute.amazonaws.com:5050"
   processor: './artilleryFunctions.js'
   phases:
     - duration: 60
@@ -8,7 +8,5 @@ scenarios:
   - name: "Retrieve an image carousel"
     flow:
       - function: 'randomizer'
-      - post:
-          url: "/{id}"
-          # json:
-          #   id: '{{id}}'
+      - get:
+          url: "/{{id}}"
