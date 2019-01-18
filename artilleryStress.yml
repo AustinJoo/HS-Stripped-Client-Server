@@ -3,10 +3,12 @@ config:
   processor: './artilleryFunctions.js'
   phases:
     - duration: 60
-      arrivalRate: 1000
+      arrivalRate: 100
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
 scenarios:
-  - name: "Retrieve an image carousel"
-    flow:
+  - flow:
       - function: 'randomizer'
       - get:
-          url: "/api/pictures/{{id}}"
+          url: "/api/pictures/{{listingID}}"
