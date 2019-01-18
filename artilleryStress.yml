@@ -3,7 +3,7 @@ config:
   processor: './artilleryFunctions.js'
   phases:
     - duration: 60
-      arrivalRate: 20
+      arrivalRate: 1000
 scenarios:
   - name: "Retrieve an image carousel"
     flow:
