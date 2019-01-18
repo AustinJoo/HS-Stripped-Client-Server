@@ -9,4 +9,4 @@ scenarios:
     flow:
       - function: 'randomizer'
       - get:
-          url: "/api/pictures/{{id}}"asdf
+          url: "/api/pictures/{{id}}"
