@@ -19,7 +19,8 @@
     "promise": "^8.0.2",
     "react": "^16.7.0",
     "react-css-grid": "^2.0.0-0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

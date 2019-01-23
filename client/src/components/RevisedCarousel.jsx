@@ -2,18 +2,21 @@ import React from "react";
 import { faGlassWhiskey } from "@fortawesome/free-solid-svg-icons";
 
 const CarouselImages = (props) => {
-    let classes = ['a','b','c','d','e']
+    var classes = ['a','b','c','d','e','a','b','c','d','e','a','b','c','d','e']
+    let i = -1;
+    console.log('IMAGE CAROUSEL PROPS: ', props);
     return(
-        <div className="carousel">
+        <div className="carouselImages">
             {props.images.map((image) => {
-                for(let i = 0; i < 5; i++){
-                    // console.log(i, classes[i])
-                    return (<img 
-                        onClick={() => props.handleClick()} 
-                        className={classes[i]} 
-                        id={i} 
-                        src={image.image_url}/>)
-                }
+            // console.log(i, classes[i])
+            while(i < props.images.length){
+                i++;
+                return (<img 
+                    onClick={() => props.handleClick()} 
+                    className={classes[i]} 
+                    id={i} 
+                    src={image.image_url}/>)
+            }
             })}
         </div>
     )
