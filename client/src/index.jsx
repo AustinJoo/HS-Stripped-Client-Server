@@ -17,48 +17,34 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pictures: [],
-      clicked: false,
-      clickedImage: "",
-      listingID: undefined
+      pictures: this.props.pictures,
+      clicked: this.props.clicked,
+      clickedImage: this.props.clickedImage,
+      listingID: this.props.listingID
     };
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.getPictures = this.getPictures.bind(this);
+    // this.getPictures = this.getPictures.bind(this);
   }
 
   componentDidMount() {
     console.log(
       "This is the current URL >>>>>>>>>>",
-      window.location.pathname.substr(1).split("/")[0]
+      window.location.pathname.slice(14)
     );
   
-    let url_listing = window.location.pathname.substr(1).split("/")[0];
+    let url_listing = window.location.pathname.slice(14);
 
     console.log('this is the url listing', url_listing)
     console.log('this is the type of the url listing: ', url_listing.constructor);
 
-    this.getPictures(url_listing); 
-  }
-
-  getPictures(listingID) {
-    console.log('YOU MADE IT THIS FAR! LISTINGID AND TYPE ARE: ', listingID);
-    // console.log('filler')
-    axios.get(`/api/pictures/${listingID}`).then(({ data }) => {
-      console.log('DID I RUN????????', data);
-      this.setState({pictures: data.images});
-      console.log(this.state.pictures);
-    })
-    .catch((err) => {
-      console.log('THERE WAS AN ERROR AT THE REACT GET: ', err);
-    })
   }
 
   handleClick(e) {
-    let image = e.target.id;
+    let image = e.target;
     this.setState({
       clicked: true,
-      clickedImage: image
+      clickedImage: image.src
     });
   }
 

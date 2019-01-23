@@ -4,7 +4,7 @@ import { faGlassWhiskey } from "@fortawesome/free-solid-svg-icons";
 const CarouselImages = (props) => {
     var classes = ['a','b','c','d','e','a','b','c','d','e','a','b','c','d','e']
     let i = -1;
-    console.log('IMAGE CAROUSEL PROPS: ', props);
+    // console.log('IMAGE CAROUSEL PROPS: ', props);
     return(
         <div className="carouselImages">
             {props.images.map((image) => {

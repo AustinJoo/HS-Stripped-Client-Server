@@ -11,17 +11,22 @@ var serverBundle = require('./client/dist/bundle/serverBundle.js').default;
 const bodyParser = require('body-parser');
 
 const app = express();
-express.static(path.join(__dirname, './client/dist'));
-console.log(__dirname + '/../client/dist');
+app.use(express.static(path.join(__dirname, './client/dist/')));
+console.log('CALLED DIRECTORY', __dirname);
+// console.log(__dirname + '/../client/dist');
 app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+    console.log(req.url)
+    next()
+})
 
 // Get images by Listing ID #
 app.get('/api/pictures/:listingID', (req, res) => {
     let listingID = req.params.listingID;
-    // console.log(listingID)
+    console.log(listingID)
     listingsDBFinder(listingID, (data) => {
         if(data){
-            // res.send(data);
             let props = {
                 pictures: data.images,
                 clicked: false,
@@ -30,31 +35,40 @@ app.get('/api/pictures/:listingID', (req, res) => {
             }
             // console.log('THIS IS PROPS: ', props);
             let component = react.createElement(serverBundle, props);
-            console.log('THIS IS COMPONENT:' , component)
+            // console.log('THIS IS COMPONENT:' , component)
             let string = reactDOM.renderToString(component);
-            console.log('STRING: ', string)
-            // console.log('this is dirname: ', __dirname);
-            // let location = path.join(__dirname + '/client/dist/bundle/bundle.js');
+            // console.log('STRING: ', string)
             res.send(
             `<!DOCTYPE html>
             <html lang="en">
-              <head>
-                <meta charset="UTF-8"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-                <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-                <title>Document</title>
-                <<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-                <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-                <style type="text/css">${css}</style>
-              </head>
-                <body>
-                  <div id="main">${string}</div>
-                  </body>
-                  </html>`
+                <head>
+                    <meta charset="UTF-8"/>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+                    <title>SSRDocument</title>
+                    <<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+                    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+                    <style type="text/css">${css}</style>
+                    </head>
+                    <body>
+                    <div id="image-carousel">${string}</div>
+                    <script src="/bundle/bundle.js"></script>
+                    <script>
+                        ReactDOM.hydrate(
+                            React.createElement(ImageCarousel, ${JSON.stringify(props)}),
+                            document.getElementById('image-carousel')
+                        );
+                    </script>
+                </body>
+            </html>`
             );
         } 
     })
 });
+
+// app.get('/*', (req, res) => {
+//     res.sendFile(path.join(__dirname + '/client/dist/index.html'))
+// })
 
 let port = 5050;
 app.listen(port, function () {
@@ -62,10 +76,4 @@ app.listen(port, function () {
 });
 
 module.exports = app;
-{/* <script src='/bundle.js'></script>
-{/* <script>
-ReactDOM.render(
-    React.createElement(),
-    document.getElementById('image-carousel')
-    );
-</script> */}
+// {/* <script src='/bundle.js'></script>

@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import $ from "jquery";
 import Carousel from "./components/Carousel.jsx";
-import axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import CarouselImages from './components/RevisedCarousel.jsx';
@@ -14,6 +13,7 @@ import {
 
 library.add(fab, faCoffee, faAngleLeft, faAngleRight);
 class App extends React.Component {
+//The props for the state are passed from the established props object in the server when S
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +27,7 @@ class App extends React.Component {
   }
 
   handleClick(e) {
+    console.log(e.target);
     let image = e.target.id;
     this.setState({
       clicked: true,
@@ -146,27 +147,7 @@ class App extends React.Component {
         />
       );
     }
-    // if (this.props.clicked === false) {
-    //     return (
-    //       <main>
-    //         <div className="wrapper2">
-    //           <CarouselImages images={this.props.pictures} handleClick={this.handleClick}/>
-    //         </div>
-    //       </main>
-    //     );
-    //   }
-  
-    //   if (this.props.clicked === true) {
-    //     return (
-    //       <Carousel
-    //         clickedImage={this.props.clickedImage}
-    //         pictures={this.props.pictures}
-    //       />
-    //     );
-    //   }
   }
 }
-
-// ReactDOM.render(<App />, document.getElementById("image-carousel"));
 
 export default App;
