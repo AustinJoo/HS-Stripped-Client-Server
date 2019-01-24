@@ -3,10 +3,6 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
 const config = {
-  // output: {
-  //   path: path.resolve(__dirname, 'client/dist/bundle'),
-  //   filename: 'bundle.js'
-  // },
   test: /\.(js|jsx)$/,
   exclude: /node_modules/,
   use: [{
