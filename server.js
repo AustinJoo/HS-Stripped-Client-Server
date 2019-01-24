@@ -46,6 +46,8 @@ app.get('/api/pictures/:listingID', (req, res) => {
               }
               
               img {
+                width: 320px;
+                height: 320px;
                 max-width: 460%;
                 max-height: 460%;
               }
