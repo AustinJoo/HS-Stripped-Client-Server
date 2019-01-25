@@ -6,20 +6,23 @@ const reactDOM = require('react-dom/server');
 var listingsDBFinder = require('./mongoFinder.js');
 var path = require('path');
 var serverBundle = require('./client/dist/bundle/serverBundle.js').default;
+let loaderKey = 'loaderio-118c8987db291cd0d31f243f4f3157ae';
 
 // Middleware
 const bodyParser = require('body-parser');
 
 const app = express();
 app.use(express.static(path.join(__dirname, './client/dist/')));
-console.log('CALLED DIRECTORY', __dirname);
-// console.log(__dirname + '/../client/dist');
 app.use(bodyParser.json());
+
+app.get(`/${loaderKey}`, (req,res) => {
+    res.send(loaderKey);
+})
 
 // Get images by Listing ID #
 app.get('/api/pictures/:listingID', (req, res) => {
     let listingID = req.params.listingID;
-    console.log(listingID)
+    console.log('LISTING ID AT SERVER: ', listingID)
     listingsDBFinder(listingID, (data) => {
         if(data){
             // console.log(data);
@@ -299,30 +302,8 @@ app.get('/api/pictures/:listingID', (req, res) => {
                 }
               }
               `
-            res.send(
-            `<!DOCTYPE html>
-            <html lang="en">
-                <head>
-                    <meta charset="UTF-8"/>
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-                    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-                    <title>SSRDocument</title>
-                    <<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-                    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-                    <style type="text/css">${css}</style>
-                    </head>
-                    <body>
-                    <div id="image-carousel">${string}</div>
-                    <script src="/bundle/bundle.js"></script>
-                    <script>
-                        ReactDOM.hydrate(
-                            React.createElement(ImageCarousel, ${JSON.stringify(props)}),
-                            document.getElementById('image-carousel')
-                        );
-                    </script>
-                </body>
-            </html>`
-            );
+            // res.send('THIS IS A TEST RESPONSE');
+            res.send([string, props, css])
         } 
     })
 });
@@ -337,4 +318,3 @@ app.listen(port, function () {
 });
 
 module.exports = app;
-// {/* <script src='/bundle.js'></script>

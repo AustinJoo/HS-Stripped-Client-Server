@@ -37,7 +37,6 @@ class App extends React.Component {
 
     console.log('this is the url listing', url_listing)
     console.log('this is the type of the url listing: ', url_listing.constructor);
-
   }
 
   handleClick(e) {
@@ -143,7 +142,8 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.clicked === false) {
+    // if (this.state.clicked === false) {
+      console.log(this.state.pictures);
       return (
         <main>
           <div className="wrapper">
@@ -151,8 +151,7 @@ class App extends React.Component {
           </div>
         </main>
       );
-    }
-
+    // }
     if (this.state.clicked === true) {
       return (
         <Carousel

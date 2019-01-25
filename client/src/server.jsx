@@ -18,8 +18,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       pictures: this.props.pictures,
-      clicked: false,
-      clickedImage: "",
+      clicked: this.props.clicked,
+      clickedImage: this.props.clickedImage,
       listingID: this.props.listingID
     };
   }

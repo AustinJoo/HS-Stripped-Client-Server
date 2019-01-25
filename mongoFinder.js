@@ -10,7 +10,7 @@ let finder = (id, callback) => {
     searchID = id;
     const connect = connection
     connect.then(() => {1
-        console.log('THE SEARCHID IS: ', searchID)
+        console.log('THE SEARCHID AT MONGOFINDER IS: ', searchID)
         let db = client.db('helensMongoCarousel')
         db.collection('listings').findOne({_id: Number(searchID)})
         .then((data) => {
