@@ -9,54 +9,7 @@ var serverBundle = require('./client/dist/bundle/serverBundle.js').default;
 let loaderKey = 'loaderio-118c8987db291cd0d31f243f4f3157ae';
 var redis = require("redis"),
 client = redis.createClient('6379', '3.16.208.224');
-
-// Middleware
-const bodyParser = require('body-parser');
-
-const app = express();
-app.use(express.static(path.join(__dirname, './client/dist/')));
-app.use(bodyParser.json());
-
-client.on('connect', () => {
-  console.log('REDIS CONNECTED!')
-})
-client.on("error", (err) => {
-  console.log("Error " + err);
-});
-
-app.get(`/${loaderKey}`, (req,res) => {
-    res.send(loaderKey);
-})
-
-// Get images by Listing ID #
-app.get('/api/pictures/:listingID', (req, res) => {
-    let listingID = req.params.listingID;
-    console.log('LISTING ID AT SERVER: ', listingID)
-    client.get(listingID, (err, data) => {
-      if(err) {
-        console.log("Redis erro: ", err)
-      } else if(data) {
-        console.log('DATA AT CACHE WAS FOUND!')
-        data = JSON.parse(data);
-        console.log(data);
-        res.send(data);
-      } else if (!data){
-        console.log('NO CACHED DATA FOUND!')
-        listingsDBFinder(listingID, (data) => {
-            if(data){
-                // console.log(data);
-                let props = {
-                    pictures: data.images,
-                    clicked: false,
-                    clickedImage: "",
-                    listingID: listingID
-                }
-                // console.log('THIS IS PROPS: ', props);
-                let component = react.createElement(serverBundle, props);
-                // console.log('THIS IS COMPONENT:' , component)
-                let string = reactDOM.renderToString(component);
-                // console.log('STRING: ', string)
-                let css = `
+let css = `
                 body {
                     margin: 0px;
                     padding: 0px;
@@ -321,8 +274,55 @@ app.get('/api/pictures/:listingID', (req, res) => {
                     }
                   }
                   `
+
+// Middleware
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(express.static(path.join(__dirname, './client/dist/')));
+app.use(bodyParser.json());
+
+client.on('connect', () => {
+  console.log('REDIS CONNECTED!')
+})
+client.on("error", (err) => {
+  console.log("Error " + err);
+});
+
+app.get(`/${loaderKey}`, (req,res) => {
+    res.send(loaderKey);
+})
+
+// Get images by Listing ID #
+app.get('/api/pictures/:listingID', (req, res) => {
+    let listingID = req.params.listingID;
+    console.log('LISTING ID AT SERVER: ', listingID)
+    client.get(listingID, (err, data) => {
+      if(err) {
+        console.log("Redis erro: ", err)
+      } else if(data) {
+        console.log('DATA AT CACHE WAS FOUND!')
+        data = JSON.parse(data);
+        console.log(data);
+        res.send([...data, css]);
+      } else if (!data){
+        console.log('NO CACHED DATA FOUND!')
+        listingsDBFinder(listingID, (data) => {
+            if(data){
+                // console.log(data);
+                let props = {
+                    pictures: data.images,
+                    clicked: false,
+                    clickedImage: "",
+                    listingID: listingID
+                }
+                // console.log('THIS IS PROPS: ', props);
+                let component = react.createElement(serverBundle, props);
+                // console.log('THIS IS COMPONENT:' , component)
+                let string = reactDOM.renderToString(component);
+                // console.log('STRING: ', string)
                 // res.send('THIS IS A TEST RESPONSE');
-                client.setex(listingID, 60, JSON.stringify([string, props, css]));
+                client.setex(listingID, 60, JSON.stringify([string, props]));
                 res.send([string, props, css])
       }
     })
