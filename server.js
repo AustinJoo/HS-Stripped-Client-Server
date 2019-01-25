@@ -303,7 +303,7 @@ app.get('/api/pictures/:listingID', (req, res) => {
       } else if(data) {
         console.log('DATA AT CACHE WAS FOUND!')
         data = JSON.parse(data);
-        console.log(data);
+        // console.log(data);
         res.send([...data, css]);
       } else if (!data){
         console.log('NO CACHED DATA FOUND!')
