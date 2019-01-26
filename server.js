@@ -297,16 +297,16 @@ app.get(`/${loaderKey}`, (req,res) => {
 app.get('/api/pictures/:listingID', (req, res) => {
     let listingID = req.params.listingID;
     console.log('LISTING ID AT SERVER: ', listingID)
-    // client.get(listingID, (err, data) => {
-    //   if(err) {
-    //     console.log("Redis erro: ", err)
-    //   } else if(data) {
-    //     console.log('DATA AT CACHE WAS FOUND!')
-    //     data = JSON.parse(data);
-    //     // console.log(data);
-    //     res.send([...data, css]);
-    //   } else if (!data){
-    //     console.log('NO CACHED DATA FOUND!')
+    client.get(listingID, (err, data) => {
+      if(err) {
+        console.log("Redis erro: ", err)
+      } else if(data) {
+        console.log('DATA AT CACHE WAS FOUND!')
+        data = JSON.parse(data);
+        // console.log(data);
+        res.send([...data, css]);
+      } else if (!data){
+        console.log('NO CACHED DATA FOUND!')
         listingsDBFinder(listingID, (data) => {
             if(data){
                 // console.log(data);
@@ -324,8 +324,8 @@ app.get('/api/pictures/:listingID', (req, res) => {
                 // res.send('THIS IS A TEST RESPONSE');
                 client.setex(listingID, 60, JSON.stringify([string, props]));
                 res.send([string, props, css])
-        //     }
-        // })
+            }
+        })
       } 
     })
 });
