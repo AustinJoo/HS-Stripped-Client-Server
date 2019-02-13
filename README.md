@@ -1,4 +1,4 @@
-# HS-Stripped-Client-Server
+# PeachiairBNB Image Carousel Server
 This repo holds the information for a single component of a listing page for a replica site modeled around popular hospitality service airbnb.com. The component itself is full-stack application with a web server that relays information between a client and RESTful API capable of interacting with a separate database. 
 
 This component renders an image carousel that, based on an input ID ranging from 0 to 9,999,999, will render a corresponding batch of predefined images (stored in a MongoDB) to the client application. The focal point of this project was to redesign the backend of an existing application and both optimize and scale the application to function at productino grade levels. A proxy server connects this component with those created by a team of developers to integrate all the parts together and render a complete listing page to the client app.
