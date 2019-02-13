@@ -5,6 +5,13 @@ This component renders an image carousel that, based on an input ID ranging from
 
 There are 2 ways of setting up and running this service to run on a deployed service instance; one requires the use Docker and the other does not. The steps for each are listed below.
 
+## Optimizations
+- Utilized a Redis cache to store documents returned from the database based on listing ID for 60 seconds.
+  - Results: 
+    - Efficiency increased by 30% 
+    - Errors decreased by 55%
+- Designed service to return an array of stringified objects to the proxy to utilize server side rendering.
+
 ## Setup (No Docker)
 - **Dependencies**
   - React for front-end
@@ -13,7 +20,7 @@ There are 2 ways of setting up and running this service to run on a deployed ser
   - Redis for caching
 - **Setup steps**
  1) Create a service to run instance
-   - Ubuntu 18.04 recommended 
+    - Ubuntu 18.04 recommended 
  2) Allow traffic on ports 22 (SSH) and 80 (HTTP)
  3) Create SSH connection  
  4) Install [Node](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04) and [Git](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-18-04)
@@ -27,7 +34,7 @@ There are 2 ways of setting up and running this service to run on a deployed ser
 ## Setup (Docker)
 - **Setup steps**
  1) Create a service to run instance
-   - Ubuntu 18.04 recommended
+    - Ubuntu 18.04 recommended
  2) Allows traffic to ports 22 (SSH) and 80 (HTTP)
  3) Create SSH connection
  4) Install and configure [Node](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04) and [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04)
