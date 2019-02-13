@@ -26,7 +26,7 @@ There are 2 ways of setting up and running this service to run on a deployed ser
  4) Install [Node](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04) and [Git](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-18-04)
  5) Run command "git clone https://github.com/PeachiairBNB/HS-Stripped-Client-Server.git"  
  7) Run command "sudo npm install"
- 8) Run command npm run concurrently
+ 8) Run command "npm run concurrently"
  9) Service should be up and running!
 - **Notes**:
   - The proxy this component is connected to utilizes server side rendering. Thus, in order to retrieve a proper component from the database, contact the web server directly by adding the endpoint "/api/pictures/[listing ID]"
