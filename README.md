@@ -15,7 +15,7 @@ There are 2 ways of setting up and running this service to run on a deployed ser
 ## Setup (No Docker)
 - **Dependencies**
   - React for front-end
-  - Node and Express frame work for web
+  - Node and Express framework for web
   - MongoDB and Mongoose ODM for database connection
   - Redis for caching
 - **Setup steps**
